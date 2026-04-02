@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Parallax | Interactive Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tooplate-living-parallax.css">
+<!--
+
+Tooplate 2150 Living Parallax
+
+https://www.tooplate.com/view/2150-living-parallax
+
+Free HTML CSS Template
+
+-->
+</head>
+<body>
+    <!-- UI Toggle Button - Always Visible -->
+    <button class="ui-toggle-btn" id="uiToggleBtn" aria-label="Toggle UI Visibility">
+        <svg viewBox="0 0 24 24" id="eyeIcon">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="ui-element">
+        <div class="logo">FOOD REDISTRIBUTION SYSTEM</div>
+        <nav id="mainNav">
+            <a onclick="openOverlay('about')">About</a>
+            <a onclick="openOverlay('testimonials')">Donor/NGO Registration</a>
+            <a onclick="openOverlay('contact'); setRole('donor')">Donor Login</a>
+            <a onclick="openOverlay('login'); setRole('ngo')">NGO Login</a>
+            <button class="fullscreen-btn" id="fullscreenBtn" aria-label="Toggle Fullscreen">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                </svg>
+            </button>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Slider -->
+    <div class="slider-wrapper">
+        <div class="slider-container" id="slider">
+            <!-- Slide 1 -->
+            <div class="slide active" data-index="0">
+                <div class="parallax-layer background-layer">
+                    <img src="images/mountain-dreams.jpg" alt="Mountains">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Keep Food Alive</h2>
+                    <p>Rescue food before it becomes waste.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" data-index="1">
+                <div class="parallax-layer background-layer">
+                    <img src="images/forest-whispers.jpg" alt="Forest">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Waste is Loss</h2>
+                    <p>You waste in seconds… someone waits for days.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" data-index="2">
+                <div class="parallax-layer background-layer">
+                    <img src="images/ocean-serenity.jpg" alt="Ocean">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Your Waste, Their Hunger</h2>
+                    <p>The bin is not hungry… people are.</p>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide" data-index="3">
+                <div class="parallax-layer background-layer">
+                    <img src="images/golden-hour.jpg" alt="Sunset">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Pass the Plate</h2>
+                    <p>A shared meal tastes better… because it carries kindness.</p>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide" data-index="4">
+                <div class="parallax-layer background-layer">
+                    <img src="images/spring-bloom.jpg" alt="Flowers">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>A Plate for Everyone</h2>
+                    <p>Food doesn’t need you… people do. Share it.</p>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide" data-index="5">
+                <div class="parallax-layer background-layer">
+                    <img src="images/desert-vastness.jpg" alt="Desert">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>From Plate to People</h2>
+                    <p>Food deserves a plate, not a bin.</p>
+                </div>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="slide" data-index="6">
+                <div class="parallax-layer background-layer">
+                    <img src="images/waterfall-majesty.jpg" alt="Waterfall">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Together We Feed</h2>
+                    <p>Throwing food is easy… feeding isn’t.</p>
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide" data-index="7">
+                <div class="parallax-layer background-layer">
+                    <img src="images/wild-encounters.jpg" alt="Wildlife">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Respect the hand that feeds</h2>
+                    <p>Behind every grain… there’s a tired farmer.</p>
+                </div>
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="slide" data-index="8">
+                <div class="parallax-layer background-layer">
+                    <img src="images/summit-glory.jpg" alt="Mountain Peak">
+                </div>
+                <div class="image-info ui-element">
+                    <h2>Don’t just eat — Share</h2>
+                    <p>Stop wasting, start sharing</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-arrow prev ui-element">‹</div>
+            <div class="nav-arrow next ui-element">›</div>
+
+            <!-- Dots -->
+            <div class="dots-container ui-element">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+                <span class="dot" data-slide="5"></span>
+                <span class="dot" data-slide="6"></span>
+                <span class="dot" data-slide="7"></span>
+                <span class="dot" data-slide="8"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Play/Pause Button -->
+    <button class="play-pause-btn ui-element" id="playPauseBtn" aria-label="Play/Pause Slideshow">
+        <svg viewBox="0 0 24 24">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>
+    </button>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container ui-element">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Duration Controls -->
+    <div class="duration-controls ui-element">
+        <button class="duration-btn" id="decreaseDuration" aria-label="Decrease Duration">−</button>
+        <div class="duration-display" id="durationDisplay">5<span>s</span></div>
+        <button class="duration-btn" id="increaseDuration" aria-label="Increase Duration">+</button>
+    </div>
+
+    <!-- About Overlay -->
+    <div class="overlay" id="aboutOverlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay('about')">×</button>
+            <h2>About Us</h2>
+            <p>We are a Real-Time Food Waste Redistribution Platform focused on reducing food wastage and hunger.</p>
+            <p>Our mission is to connect food donors with NGOs and volunteers efficiently.</p>
+            <p>We help restaurants, hotels, and event organizers donate surplus food instead of wasting it.</p>
+            <p>Our system uses real-time notifications to alert nearby NGOs instantly.</p>
+            <p>We provide location-based tracking (GPS) for quick and reliable food pickup.</p>
+            <p>Our platform ensures safe, timely, and transparent food distribution.</p>
+            <p>We aim to create a sustainable ecosystem by minimizing waste and maximizing impact.</p>
+            <p>We support Zero Hunger and Responsible Consumption goals.</p>
+            <p>We believe that every meal saved can change a life.</p>
+            <p>Our vision is to build a smarter, hunger-free society using technology.</p>
+        </div>
+    </div>
+
+    <!-- Testimonials Overlay -->
+    <div class="overlay" id="testimonialsOverlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay('testimonials')">×</button>
+            <h2>Registration for Donor/NGO</h2>
+            
+            <form class="contact-form" onsubmit="loginSubmit(event)">
+
+<label style="margin-bottom:10px;">Register As</label>
+
+<div class="radio-inputs">
+
+  <label class="radio">
+    <input type="radio" name="role" value="donor" required>
+    <span class="name">Donor</span>
+  </label>
+
+  <label class="radio">
+    <input type="radio" name="role" value="ngo">
+    <span class="name">NGO</span>
+  </label>
+
+</div>
+
+    <!-- Name -->
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Enter your name" required>
+
+    <!-- Email -->
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Enter your email" required>
+
+    <!-- Phone -->
+    <label>Phone</label>
+    <input type="text" name="phone" placeholder="Enter phone number" required>
+
+    <!-- Password -->
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Create password" required>
+
+    <!-- Confirm Password -->
+    <label>Confirm Password</label>
+    <input type="password" name="confirm_password" placeholder="Confirm password" required>
+
+    <button type="submit" class="submit-btn">Register</button>
+</form>
+        </div>
+    </div>
+
+    <!-- Contact Overlay -->
+    <div class="overlay" id="contactOverlay">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeOverlay('contact')">×</button>
+        <h2>Donor Login</h2>
+
+        <form id="donorForm" class="contact-form" novalidate>
+            
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your.email@example.com">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Your password">
+
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+</div>
+
+
+    <!-- Login Overlay -->
+    <div class="overlay" id="loginOverlay">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeOverlay('login')">×</button>
+        <h2>NGO Login</h2>
+
+        <form id="ngoForm" class="contact-form" novalidate>
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your.email@gmail.com">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Your password">
+
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+</div>
+
+    <!-- Privacy Overlay -->
+<div class="overlay" id="privacyOverlay">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeOverlay('privacy')">×</button>
+        <h2>Privacy Policy</h2>
+
+        <p>At Food Redistribution System (RT-FWRS), we are committed to protecting your privacy and ensuring the security of your personal information. This policy explains how we collect, use, and safeguard your data.</p>
+        
+        <p><strong>Information We Collect:</strong> We collect personal details such as name, email, phone number, and location during registration. We also collect food donation details like food type, quantity, and pickup location.</p>
+        
+        <p><strong>How We Use Your Information:</strong> Your information is used to connect food donors with NGOs and volunteers, send real-time notifications, and improve platform performance.</p>
+        
+        <p><strong>Data Sharing:</strong> We do not sell or trade your personal data. Information is only shared with verified NGOs and volunteers for food pickup and delivery coordination.</p>
+        
+        <p><strong>Data Security:</strong> We use secure authentication, encryption, and role-based access (Donor / NGO / Admin) to protect your data from unauthorized access.</p>
+        
+        <p><strong>Cookies:</strong> Our website may use cookies to enhance user experience and analyze usage. You can disable cookies in your browser settings.</p>
+        
+        <p><strong>Third-Party Services:</strong> We may use map services for location tracking and cloud platforms for data storage. These services follow their own privacy policies.</p>
+        
+        <p><strong>Your Rights:</strong> You can access, update, or request deletion of your personal data at any time by contacting us.</p>
+        
+        <p><strong>Changes to This Policy:</strong> We may update this policy periodically. Changes will be reflected on this page.</p>
+        
+        <p>If you have any questions, contact us at <strong>support@greenbin.com</strong>.</p>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="ui-element">
+        <p>Copyright © 2026 Food Redistribution System | <a href="#" onclick="openOverlay('privacy'); return false;">Privacy</a> | Designed by Kota</a></p>
+    </footer>
+<script src="tooplate-living-scripts.js"></script>
+
+<script>
+let currentRole = "";
+
+// set role when clicking navbar
+function setRole(role){
+    currentRole = role;
+}
+
+// DONOR LOGIN
+document.getElementById("donorForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = this.email.value;
+    const password = this.password.value;
+
+    if(email === "" || password === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    if(currentRole === "donor"){
+        localStorage.setItem("userRole", "donor");
+        window.location.href = "donor.html";
+    } else {
+        alert("Please use correct login option");
+    }
+});
+
+// NGO LOGIN
+document.getElementById("ngoForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = this.email.value;
+    const password = this.password.value;
+
+    if(email === "" || password === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    if(currentRole === "ngo"){
+        localStorage.setItem("userRole", "ngo");
+        window.location.href = "ngo.html";
+    } else {
+        alert("Please use correct login option");
+    }
+});
+</script>
+
+</script>
+
+<style>
+    .radio-inputs {
+  
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.08); /* glass */
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  padding: 4px;
+  width: 100%;
+}
+
+.radio-inputs .radio {
+  flex: 1;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px 0;
+  border-radius: 8px;
+
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* selected */
+.radio-inputs .radio input:checked + .name {
+  background: #10B981; /* your theme green */
+  color: white;
+  font-weight: 600;
+}
+
+/* hover */
+.radio-inputs .radio:hover .name {
+  background: rgba(255,255,255,0.1);
+}
+</style>
+
+<script>
+    const role = document.querySelector('input[name="role"]:checked')?.value;
+
+if(!role){
+  alert("Please select role");
+  return;
+}
+
+console.log(role); // donor / ngo
+</script>
+
+</body>
+</html>

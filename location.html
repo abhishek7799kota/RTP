@@ -1,0 +1,275 @@
+<!-- location.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <title>Location & Pickup</title>
+    <link rel="stylesheet" href="tooplate-living-parallax.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">HI, DONOR</div>
+    <nav>
+        <a href="donor.html">Dashboard</a>
+        <a onclick="logout()">Logout</a>
+    </nav>
+</header>
+
+<div class="overlay-content" style="max-width:700px; margin:120px auto;">
+
+    <h2>Pickup Scheduling</h2>
+    
+        <div id="map" style="height: 300px; border-radius: 12px; margin-bottom:15px;"></div>
+        <input type="text" id="locationInput" class="form__field" placeholder="Select pickup location on map" readonly>
+        
+        <button class="submit-btn" onclick="saveLocation()">Save Location</button>
+
+
+</div>
+
+<script>
+function savePickup(){
+    alert("Pickup scheduled successfully!");
+}
+
+function logout(){
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+</script>
+<style>
+
+    .overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 🔥 main spacing control */
+}
+
+#map {
+    height: 300px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+#locationInput {
+    margin-top: 5px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.submit-btn {
+    margin-top: 10px;
+}
+
+/* section spacing from header */
+.cards-section {
+  margin-top: 120px; /* 🔥 pushes cards down */
+  display: flex;
+  justify-content: center;
+}
+
+/* container for cards */
+.donor-cards {
+  display: flex;
+  flex-direction: row; /* 🔥 horizontal */
+  justify-content: center;
+  align-items: center;
+
+  gap: 30px; /* space between cards */
+
+  flex-wrap: nowrap; /* 🔥 prevent going to next line */
+}
+
+/* individual card */
+.card {
+  width: 300px;
+  min-width: 260px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+/* fix text spacing */
+.card h3 {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* button spacing */
+.card .submit-btn {
+  margin-top: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* hover effect */
+.card:hover {
+  transform: translateY(-6px);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
+}
+    
+.qty-label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+    .glass-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.glass-stepper input {
+  width: 60px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #10B981;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  margin: 0 5px;
+}
+
+.glass-stepper button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+
+.glass-stepper button:hover {
+  background: #10B981;
+}
+    /* FORM GROUP */
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+  width: 100%;
+  margin:0;
+}
+
+/* INPUT */
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  outline: 0;
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 0;
+  background: transparent;
+  transition: 0.3s;
+}
+
+/* LABEL */
+.form__label {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  font-size: 16px;
+  color: #ccc;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+/* FOCUS EFFECT */
+.form__field:focus {
+  border-bottom: 2px solid #10B981;
+}
+
+/* FLOAT LABEL */
+.form__field:focus ~ .form__label,
+.form__field:valid ~ .form__label {
+  top: 0;
+  font-size: 13px;
+  color: #10B981;
+}
+
+/* REMOVE SHADOW */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+</style>
+<script>
+var map = L.map('map').setView([17.3850, 78.4867], 13); // default Hyderabad
+
+// map tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// marker
+var marker = L.marker([17.3850, 78.4867], {draggable: true}).addTo(map);
+
+// update input when dragging
+marker.on('dragend', function(e){
+    var latlng = marker.getLatLng();
+    document.getElementById("locationInput").value =
+        latlng.lat.toFixed(5) + ", " + latlng.lng.toFixed(5);
+});
+
+// click to move marker
+map.on('click', function(e){
+    marker.setLatLng(e.latlng);
+    document.getElementById("locationInput").value =
+        e.latlng.lat.toFixed(5) + ", " + e.latlng.lng.toFixed(5);
+});
+
+// auto-detect user location 🔥
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+        var userLatLng = [
+            position.coords.latitude,
+            position.coords.longitude
+        ];
+
+        map.setView(userLatLng, 15);
+        marker.setLatLng(userLatLng);
+
+        document.getElementById("locationInput").value =
+            userLatLng[0].toFixed(5) + ", " + userLatLng[1].toFixed(5);
+    });
+}
+
+// save function
+function saveLocation(){
+    const location = document.getElementById("locationInput").value;
+
+    if(!location){
+        alert("Please select a location");
+        return;
+    }
+
+    localStorage.setItem("pickupLocation", location);
+    alert("Location saved successfully!");
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NGO Dashboard</title>
+
+    <!-- SAME CSS AS INDEX -->
+    <link rel="stylesheet" href="tooplate-living-parallax.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="ui-element">
+    <div class="logo">FOOD REDISTRIBUTION SYSTEM</div>
+    <nav>
+        <a>Notifications</a>
+        <a onclick="logout()">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<div style="
+    display:flex; 
+    justify-content:center; 
+    align-items:flex-start; 
+    gap:30px; 
+    padding-top:120px;
+">
+
+    <!-- CARD 1 -->
+    <div class="overlay-content" style="max-width:350px; text-align:center;">
+        <h2>Welcome NGO</h2>
+        <p>View and collect food donations</p>
+        <button class="submit-btn" onclick="viewDonations()">View Donations</button>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="overlay-content" style="max-width:350px; text-align:center;">
+        <h2>Pickup Requests</h2>
+        <p>Manage incoming food pickup requests</p>
+        <button class="submit-btn" onclick="viewRequests()">View Requests</button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="overlay-content" style="max-width:350px; text-align:center;">
+        <h2>Distribution</h2>
+        <p>Track food distribution to people</p>
+        <button class="submit-btn" onclick="viewDistribution()">View Status</button>
+    </div>
+
+</div>
+
+
+<!-- SCRIPT -->
+<script>
+// 🔐 SECURITY CHECK
+const role = localStorage.getItem("userRole");
+
+if(role !== "ngo"){
+    window.location.href = "index.html";
+}
+
+// 🚪 LOGOUT
+function logout(){
+    localStorage.removeItem("userRole");
+    window.location.href = "index.html";
+}
+
+// 📦 DEMO FUNCTION
+function viewDonations(){
+    alert("No donations available yet");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Dashboard</title>
+
+    <!-- SAME CSS AS INDEX -->
+    <link rel="stylesheet" href="tooplate-living-parallax.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER (SAME STYLE) -->
+<header class="ui-element">
+    <div class="logo">Hi, Donor</div>
+    <nav>
+        <a onclick="openOverlay('my-account')">My Account</a>
+        <a>Notifications</a>
+        <a onclick="logout()">Logout</a>
+    </nav>
+</header>
+<div class="cards-section" >
+
+    <div class="donor-cards" >
+
+        <div class="overlay-content card" >
+            <h3>Location & Pickup</h3>
+            
+<button class="submit-btn" onclick="window.location.href='location.html'">Manage</button>        </div>
+
+        <div class="overlay-content card">
+            <h3>Track Donation</h3>
+            
+            <button class="submit-btn" onclick="window.location.href='track.html'">Track</button>
+        </div>
+
+        <div class="overlay-content card">
+            <h3>Donation History</h3>
+            
+            <button class="submit-btn" onclick="window.location.href='history.html'">View</button>
+        </div>
+
+    </div>
+
+</div>
+<!-- MAIN GLASS SECTION -->
+<div style="display:flex; justify-content:center; align-items:center; height:100vh;">
+
+<div class="overlay-content" style="
+    max-width:600px; 
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+">
+
+        <h2>Donation Posting</h2>
+        
+
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="" required>
+            <label class="form__label">Food Item</label>
+        </div>
+
+<div class="form__group field">
+
+    <label class="form__label qty-label">
+        Quantity (No. of Servings)
+    </label>
+
+    <div class="glass-stepper">
+        <button type="button" onclick="changeQty(-1)">−</button>
+        <input id="qty" type="text" value="1" required>
+        <button type="button" onclick="changeQty(1)">+</button>
+    </div>
+
+</div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="" required>
+            <label class="form__label">Expiry Time (in hrs)</label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="" required>
+            <label class="form__label">Pick-up Time</label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="" required>
+            <label class="form__label">Contact Number</label>
+        </div>
+
+        <button class="submit-btn" onclick="submitFood()">Submit Donation</button>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- SCRIPTS -->
+<script>
+// 🔐 check login
+const role = localStorage.getItem("userRole");
+
+if(role !== "donor"){
+    window.location.href = "index.html";
+}
+
+// 🚪 logout
+function logout(){
+    localStorage.removeItem("userRole");
+    window.location.href = "index.html";
+}
+
+// 📦 submit
+function submitFood(){
+    alert("Food Submitted Successfully!");
+}
+</script>
+
+<style>
+/* section spacing from header */
+.cards-section {
+  margin-top: 120px; /* 🔥 pushes cards down */
+  display: flex;
+  justify-content: center;
+}
+
+/* container for cards */
+.donor-cards {
+  display: flex;
+  flex-direction: row; /* 🔥 horizontal */
+  justify-content: center;
+  align-items: center;
+
+  gap: 30px; /* space between cards */
+
+  flex-wrap: nowrap; /* 🔥 prevent going to next line */
+}
+
+/* individual card */
+.card {
+  width: 300px;
+  min-width: 260px;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+/* fix text spacing */
+.card h3 {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* button spacing */
+.card .submit-btn {
+  margin-top: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* hover effect */
+.card:hover {
+  transform: translateY(-6px);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
+}
+    
+.qty-label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+    .glass-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.glass-stepper input {
+  width: 60px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #10B981;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  margin: 0 5px;
+}
+
+.glass-stepper button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+
+.glass-stepper button:hover {
+  background: #10B981;
+}
+    /* FORM GROUP */
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+  width: 100%;
+  margin:0;
+}
+
+/* INPUT */
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  outline: 0;
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 0;
+  background: transparent;
+  transition: 0.3s;
+}
+
+/* LABEL */
+.form__label {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  font-size: 16px;
+  color: #ccc;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+/* FOCUS EFFECT */
+.form__field:focus {
+  border-bottom: 2px solid #10B981;
+}
+
+/* FLOAT LABEL */
+.form__field:focus ~ .form__label,
+.form__field:valid ~ .form__label {
+  top: 0;
+  font-size: 13px;
+  color: #10B981;
+}
+
+/* REMOVE SHADOW */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+</style>
+<script>
+function changeQty(val){
+    let input = document.getElementById("qty");
+    let current = parseInt(input.value) || 1;
+
+    let newVal = current + val;
+
+    if(newVal >= 1 && newVal <= 100){ // limit
+        input.value = newVal;
+    }
+}
+</script>
+
+<script>
+function openLocation(){
+    alert("Location & Pickup scheduling coming soon");
+}
+
+function trackDonation(){
+    alert("Tracking system coming soon");
+}
+
+function viewHistory(){
+    alert("Donation history coming soon");
+}
+</script>
+
+</body>
+</html>
